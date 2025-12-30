@@ -1,9 +1,9 @@
 # Calculent ready-to-upload packages
 
-The `dist` folder now ships only the ready-to-upload folders generated from the repository sources:
+The `dist` folder ships ready-to-upload packages generated from the repository sources:
 
-- `calculent-child/` — drop-in Astra child theme folder.
-- `calculent-logic/` — drop-in Calculent Logic plugin folder.
+- `calculent-child/` — drop-in Astra child theme folder (upload the folder or compress yourself for the WordPress installer).
+- `calculent-logic/` — drop-in Calculent Logic plugin folder (upload the folder or compress yourself for the WordPress installer).
 
 Refresh the ready-to-upload folders after making changes by running:
 
@@ -11,4 +11,4 @@ Refresh the ready-to-upload folders after making changes by running:
 ./scripts/package.sh
 ```
 
-ZIP archives for distribution are built automatically; rerun the script any time you need fresh `.zip` files for uploading into WordPress. The script copies from `wp-content/themes/calculent-child` and `wp-content/plugins/calculent-logic` so all distributable assets stay in sync with the codebase.
+ZIP archives are intentionally gitignored. If you need uploadable zips, run the packaging script locally to generate them.
