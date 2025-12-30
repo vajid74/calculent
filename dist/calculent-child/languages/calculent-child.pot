@@ -1,0 +1,21 @@
+# Copyright (C) 2025 Vajid74
+# This file is distributed under the same license as the Calculent Astra Child plugin.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: footer.php:0
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content.php:0
+msgid "Posted on %s by %s"
+msgstr ""
+
+#: template-parts/content.php:0
+msgid "Read More"
+msgstr ""
+
+#: template-parts/content.php:0
+msgid "Pages:"
+msgstr ""
