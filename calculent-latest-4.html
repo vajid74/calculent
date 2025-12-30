@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculent - Modern Tools & Calculators Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #7C3AED;
+            --primary-purple-hover: #6D28D9;
+            --secondary-orange: #FF6347;
+            --secondary-orange-hover: #E5533A;
+            --light-bg: #F9F9F7;
+            --dark-bg: #1a1a2e;
+            --gradient-hero: linear-gradient(135deg, #FF1493 0%, #BA55D3 50%, #4169E1 100%);
+            --gradient-advanced: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Advanced Background Patterns */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 25px 25px, #7C3AED 2px, transparent 0),
+                radial-gradient(circle at 75px 75px, #FF6347 1px, transparent 0);
+            background-size: 100px 100px;
+            background-position: 0 0, 50px 50px;
+        }
+
+        /* Header with Advanced Styling */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-purple);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-purple-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 99, 71, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-orange-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 99, 71, 0.5);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Advanced Hero Section */
+        .hero {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 10rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Advanced Floating Icons - Enhanced for Mobile */
+        .hero-floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            animation: advancedFloat 8s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Desktop positioning */
+        .floating-icon:nth-child(1) { 
+            top: 15%; 
+            left: 10%; 
+            animation-delay: 0s; 
+        }
+        .floating-icon:nth-child(2) { 
+            top: 20%; 
+            right: 15%; 
+            animation-delay: 1.2s; 
+        }
+        .floating-icon:nth-child(3) { 
+            top: 65%; 
+            left: 8%; 
+            animation-delay: 2.4s; 
+        }
+        .floating-icon:nth-child(4) { 
+            top: 70%; 
+            right: 12%; 
+            animation-delay: 3.6s; 
+        }
+        .floating-icon:nth-child(5) { 
+            top: 45%; 
+            right: 45%; 
+            animation-delay: 1.8s; 
+        }
+
+        @keyframes advancedFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(2deg) scale(1.05); }
+            50% { transform: translateY(-30px) rotate(0deg) scale(1.1); }
+            75% { transform: translateY(-15px) rotate(-2deg) scale(1.05); }
+        }
+
+        /* Mobile floating animation - gentler movement */
+        @keyframes mobileFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(0.8); }
+            25% { transform: translateY(-8px) rotate(1deg) scale(0.85); }
+            50% { transform: translateY(-15px) rotate(0deg) scale(0.9); }
+            75% { transform: translateY(-8px) rotate(-1deg) scale(0.85); }
+        }
+
+        .calculator-3d {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient-card);
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .calculator-3d::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            height: 25px;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            border-radius: 6px;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.6),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .calculator-3d::after {
+            content: '123.45';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 11px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 3.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Advanced Search Bar */
+        .search-bar {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            border: none;
+            font-size: 1.1rem;
+            outline: none;
+            color: #333;
+            background: transparent;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .search-bar button {
+            padding: 1.5rem 2.5rem;
+            background: var(--gradient-hero);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.02);
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Advanced Featured Calculators Section */
+        .featured {
+            background: var(--light-bg);
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, rgba(255, 20, 147, 0.1) 0%, transparent 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: #1a1a2e;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(15, 23, 42, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-card);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(15, 23, 42, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .card-header {
+            padding: 2.5rem 2.5rem 1.5rem;
+            border-top: 6px solid;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header.blue {
+            border-color: #4169E1;
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.15), rgba(65, 105, 225, 0.05));
+        }
+
+        .card-header.green {
+            border-color: #10B981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+        }
+
+        .card-header.purple {
+            border-color: #7C3AED;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.05));
+        }
+
+        .card-header.cyan {
+            border-color: #06B6D4;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+        }
+
+        .card-header.orange {
+            border-color: #FF6347;
+            background: linear-gradient(135deg, rgba(255, 99, 71, 0.15), rgba(255, 99, 71, 0.05));
+        }
+
+        .card-header.yellow {
+            border-color: #F59E0B;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+        }
+
+        .card-icon-container {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon-container {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-body {
+            padding: 0 2.5rem 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+            text-align: center;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .card-link {
+            color: var(--primary-purple);
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-purple);
+            border-radius: 12px;
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .card-link:hover {
+            gap: 1rem;
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Advanced Categories Section */
+        .categories {
+            background: var(--dark-bg);
+            color: white;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .categories::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 99, 71, 0.2) 0%, transparent 50%);
+        }
+
+        .categories .section-title {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-box:hover::before {
+            opacity: 0.1;
+        }
+
+        .category-box.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .category-icon-container {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-box:hover .category-icon-container {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .category-box h3 {
+            font-size: 1.4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: white;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.15);
+        }
+
+        .faq-question {
+            padding: 2rem 2.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-left: 4px solid var(--primary-purple);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%);
+        }
+
+        .faq-question h3 {
+            font-size: 1.25rem;
+            color: #1a1a2e;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            color: var(--primary-purple);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 2rem 2.5rem;
+            color: #666;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Compliance Section */
+        .compliance {
+            background: var(--light-bg);
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .compliance-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 4px solid;
+        }
+
+        .compliance-card.security {
+            border-color: #10B981;
+        }
+
+        .compliance-card.privacy {
+            border-color: #3B82F6;
+        }
+
+        .compliance-card.accessibility {
+            border-color: #F59E0B;
+        }
+
+        .compliance-card.reliability {
+            border-color: #EF4444;
+        }
+
+        .compliance-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.2);
+        }
+
+        .compliance-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .compliance-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .compliance-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .compliance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* About Section Enhancement */
+        .about {
+            background: white;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            opacity: 0.05;
+            transform: translate(50%, -50%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: rgba(124, 58, 237, 0.02);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(124, 58, 237, 0.05);
+            transform: translateX(10px);
+        }
+
+        .feature-icon-container {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+        }
+
+        .feature-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .about-visual {
+            background: var(--gradient-hero);
+            border-radius: 32px;
+            padding: 5rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .about-visual .emoji {
+            font-size: 12rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Enhanced CTA Section */
+        .cta {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta p {
+            font-size: 1.35rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-purple);
+            transform: translateY(-3px);
+        }
+
+        /* Enhanced Mobile Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            /* Adjust floating icons for large tablets */
+            .floating-icon {
+                transform: scale(0.9);
+            }
+
+            .calculator-3d {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 2rem;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem;
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+
+            /* Mobile floating icons positioning - KEEP VISIBLE */
+            .floating-icon:nth-child(1) { 
+                top: 10%; 
+                left: 5%; 
+                animation: mobileFloat 6s ease-in-out infinite;
+            }
+            .floating-icon:nth-child(2) { 
+                top: 15%; 
+                right: 5%; 
+                animation: mobileFloat 7s ease-in-out infinite;
+                animation-delay: 1s;
+            }
+            .floating-icon:nth-child(3) { 
+                top: 75%; 
+                left: 3%; 
+                animation: mobileFloat 8s ease-in-out infinite;
+                animation-delay: 2s;
+            }
+            .floating-icon:nth-child(4) { 
+                top: 80%; 
+                right: 8%; 
+                animation: mobileFloat 6.5s ease-in-out infinite;
+                animation-delay: 0.5s;
+            }
+            .floating-icon:nth-child(5) { 
+                top: 50%; 
+                left: 50%; 
+                transform: translateX(-50%);
+                animation: mobileFloat 7.5s ease-in-out infinite;
+                animation-delay: 1.5s;
+            }
+
+            /* Scale down mobile icons */
+            .floating-icon {
+                transform: scale(0.7);
+            }
+
+            .calculator-3d {
+                width: 60px;
+                height: 60px;
+            }
+
+            .calculator-3d::before {
+                top: 6px;
+                left: 6px;
+                right: 6px;
+                height: 16px;
+            }
+
+            .calculator-3d::after {
+                font-size: 8px;
+                bottom: 8px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 4rem 1rem;
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2rem;
+            }
+
+            .about-visual .emoji {
+                font-size: 6rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            /* Further optimize mobile icons for small screens */
+            .floating-icon:nth-child(1) { 
+                top: 8%; 
+                left: 2%; 
+            }
+            .floating-icon:nth-child(2) { 
+                top: 12%; 
+                right: 2%; 
+            }
+            .floating-icon:nth-child(3) { 
+                top: 78%; 
+                left: 1%; 
+            }
+            .floating-icon:nth-child(4) { 
+                top: 82%; 
+                right: 3%; 
+            }
+            .floating-icon:nth-child(5) { 
+                top: 45%; 
+                left: 50%; 
+                transform: translateX(-50%) scale(0.6);
+            }
+
+            .floating-icon {
+                transform: scale(0.5);
+            }
+
+            .calculator-3d {
+                width: 45px;
+                height: 45px;
+            }
+
+            .calculator-3d::before {
+                top: 4px;
+                left: 4px;
+                right: 4px;
+                height: 12px;
+            }
+
+            .calculator-3d::after {
+                font-size: 6px;
+                bottom: 5px;
+                content: '123';
+            }
+
+            /* Adjust SVG sizes for mobile */
+            .floating-icon svg {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            .faq-question {
+                padding: 1.5rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .floating-icon {
+                transform: scale(0.4);
+            }
+
+            .floating-icon svg {
+                width: 35px !important;
+                height: 35px !important;
+            }
+
+            .calculator-3d {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Calculent</div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            <nav id="mainNav">
+                <a href="#home">Home</a>
+                <a href="#tools">Tools</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+                <a href="#faq">FAQ</a>
+                <a href="#compliance">Compliance</a>
+                <a href="#tools" class="btn btn-primary">Explore Tools</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="bg-pattern"></div>
+            
+            <div class="hero-floating-icons">
+                <!-- 3D Calculator -->
+                <div class="floating-icon">
+                    <div class="calculator-3d"></div>
+                </div>
+                
+                <!-- Pie Chart -->
+                <div class="floating-icon">
+                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="35" cy="35" r="30" fill="rgba(124, 58, 237, 0.3)" stroke="rgba(124, 58, 237, 0.8)" stroke-width="2"/>
+                        <path d="M35 5 A30 30 0 0 1 60 45 L35 35 Z" fill="rgba(6, 182, 212, 0.8)"/>
+                        <path d="M35 5 A30 30 0 0 0 10 45 L35 35 Z" fill="rgba(255, 99, 71, 0.8)"/>
+                    </svg>
+                </div>
+
+                <!-- Currency Icon -->
+                <div class="floating-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="25" fill="rgba(255, 215, 0, 0.3)" stroke="rgba(255, 215, 0, 1)" stroke-width="3"/>
+                        <text x="30" y="37" text-anchor="middle" fill="rgba(255, 215, 0, 1)" font-size="20" font-weight="bold">₹</text>
+                    </svg>
+                </div>
+
+                <!-- Heart Pulse -->
+                <div class="floating-icon">
+                    <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M32.5 55 C32.5 55, 8 37, 8 22 C8 14, 14 8, 22 8 C26 8, 32.5 12, 32.5 12 C32.5 12, 39 8, 43 8 C51 8, 57 14, 57 22 C57 37, 32.5 55, 32.5 55 Z" fill="rgba(255, 99, 132, 0.8)" stroke="#ff4757" stroke-width="2"/>
+                        <path d="M12 32 L18 26 L24 32 L30 20 L36 32 L42 26 L48 32 L54 26" stroke="white" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+
+                <!-- Text Aa -->
+                <div class="floating-icon">
+                    <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="15" width="39" height="25" rx="6" fill="rgba(255, 255, 255, 0.2)" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"/>
+                        <text x="27.5" y="32" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Aa</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="hero-content">
+                <h1>Explore 10+ Smart Calculators & Tools</h1>
+                <p>Access free, professional-grade calculators and tools designed to simplify your daily tasks with precision and reliability</p>
+                
+                <form class="search-bar" id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Search for calculators, converters, tools..." />
+                    <button type="submit">Live Search</button>
+                </form>
+
+                <div class="hero-cta">
+                    <a href="#tools" class="btn btn-primary">Browse All Tools</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Calculators Section -->
+        <section class="featured" id="tools">
+            <div class="container">
+                <h2 class="section-title">Featured Calculators</h2>
+                <div class="cards-grid" id="cardsGrid">
+                    <!-- Mortgage Calculator -->
+                    <div class="card">
+                        <div class="card-header blue">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 35 L45 15 L75 35 L70 75 L20 75 Z" fill="rgba(65, 105, 225, 0.2)" stroke="#4169E1" stroke-width="3"/>
+                                    <rect x="35" y="45" width="20" height="18" fill="rgba(65, 105, 225, 0.3)" stroke="#4169E1" stroke-width="2"/>
+                                    <circle cx="75" cy="22" r="10" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+                                    <text x="75" y="28" text-anchor="middle" fill="#333" font-size="12" font-weight="bold">%</text>
+                                    <circle cx="20" cy="28" r="8" fill="#10B981" stroke="#059669" stroke-width="2"/>
+                                    <text x="20" y="33" text-anchor="middle" fill="white" font-size="10" font-weight="bold">₹</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Mortgage Calculator</h3>
+                            <p>Calculate monthly payments, interest rates, and total loan costs with our advanced mortgage calculator featuring amortization schedules.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+
+                    <!-- BMI Calculator -->
+                    <div class="card">
+                        <div class="card-header green">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <ellipse cx="45" cy="50" rx="18" ry="30" fill="rgba(16, 185, 129, 0.2)" stroke="#10B981" stroke-width="3"/>
+                                    <circle cx="45" cy="32" r="10" fill="rgba(16, 185, 129, 0.3)" stroke="#10B981" stroke-width="2"/>
+                                    <path d="M22 45 Q35 38 45 45 Q55 52 68 45" stroke="#ff4757" stroke-width="3" fill="none"/>
+                                    <circle cx="68" cy="22" r="14" fill="rgba(16, 185, 129, 0.9)" stroke="#059669" stroke-width="2"/>
+                                    <text x="68" y="28" text-anchor="middle" fill="white" font-size="11" font-weight="bold">BMI</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>BMI Calculator</h3>
+                            <p>Determine your Body Mass Index and get personalized health recommendations with detailed analysis and health insights.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+
+                    <!-- Password Generator -->
+                    <div class="card">
+                        <div class="card-header purple">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25 22 L65 22 Q72 22 72 29 L72 61 Q72 68 65 68 L25 68 Q18 68 18 61 L18 29 Q18 22 25 22 Z" fill="rgba(124, 58, 237, 0.2)" stroke="#7C3AED" stroke-width="3"/>
+                                    <circle cx="45" cy="45" r="10" fill="rgba(124, 58, 237, 0.9)" stroke="#6D28D9" stroke-width="2"/>
+                                    <path d="M38 38 L52 52 M52 38 L38 52" stroke="white" stroke-width="2"/>
+                                    <rect x="32" y="55" width="26" height="10" rx="3" fill="rgba(124, 58, 237, 0.3)" stroke="#7C3AED" stroke-width="1"/>
+                                    <text x="45" y="62" text-anchor="middle" fill="#7C3AED" font-size="9" font-weight="bold">••••••</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Password Generator</h3>
+                            <p>Create ultra-secure passwords with customizable length, character options, and security strength analysis for maximum protection.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+
+                    <!-- Temperature Converter -->
+                    <div class="card">
+                        <div class="card-header cyan">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="38" y="18" width="14" height="54" rx="7" fill="rgba(6, 182, 212, 0.2)" stroke="#06B6D4" stroke-width="3"/>
+                                    <rect x="35" y="23" width="20" height="40" rx="4" fill="url(#tempGradient)"/>
+                                    <circle cx="45" cy="15" r="8" fill="rgba(6, 182, 212, 0.3)" stroke="#06B6D4" stroke-width="2"/>
+                                    <text x="28" y="28" text-anchor="middle" fill="#06B6D4" font-size="11" font-weight="bold">°C</text>
+                                    <text x="62" y="28" text-anchor="middle" fill="#ff4757" font-size="11" font-weight="bold">°F</text>
+                                    <defs>
+                                        <linearGradient id="tempGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#ff4757;stop-opacity:1" />
+                                            <stop offset="50%" style="stop-color:#ffa502;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Temperature Converter</h3>
+                            <p>Convert between Celsius, Fahrenheit, and Kelvin with precision and ease, including scientific temperature scales.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+
+                    <!-- Tip Calculator -->
+                    <div class="card">
+                        <div class="card-header orange">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="22" y="22" width="36" height="46" rx="4" fill="rgba(255, 99, 71, 0.2)" stroke="#FF6347" stroke-width="3"/>
+                                    <line x1="28" y1="32" x2="52" y2="32" stroke="#FF6347" stroke-width="2"/>
+                                    <line x1="28" y1="40" x2="46" y2="40" stroke="#FF6347" stroke-width="2"/>
+                                    <line x1="28" y1="48" x2="48" y2="48" stroke="#FF6347" stroke-width="2"/>
+                                    <line x1="28" y1="56" x2="40" y2="56" stroke="#FF6347" stroke-width="2"/>
+                                    <circle cx="62" cy="28" r="10" fill="#FFD700" stroke="#FFA500" stroke-width="2"/>
+                                    <text x="62" y="34" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">₹</text>
+                                    <path d="M56 52 L66 40 L76 52" stroke="#10B981" stroke-width="3" fill="none"/>
+                                    <circle cx="66" cy="58" r="4" fill="#10B981"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Tip Calculator</h3>
+                            <p>Calculate tips and split bills effortlessly with our smart dining calculator featuring group splitting and custom percentages.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+
+                    <!-- Word Counter -->
+                    <div class="card">
+                        <div class="card-header yellow">
+                            <div class="card-icon-container">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="18" y="22" width="46" height="36" rx="4" fill="rgba(245, 158, 11, 0.2)" stroke="#F59E0B" stroke-width="3"/>
+                                    <line x1="24" y1="32" x2="58" y2="32" stroke="#F59E0B" stroke-width="2"/>
+                                    <line x1="24" y1="40" x2="52" y2="40" stroke="#F59E0B" stroke-width="2"/>
+                                    <line x1="24" y1="48" x2="56" y2="48" stroke="#F59E0B" stroke-width="2"/>
+                                    <rect x="40" y="34" width="10" height="8" fill="rgba(245, 158, 11, 0.6)"/>
+                                    <rect x="48" y="42" width="8" height="8" fill="rgba(245, 158, 11, 0.6)"/>
+                                    <circle cx="68" cy="34" r="10" fill="rgba(245, 158, 11, 0.9)" stroke="#D97706" stroke-width="2"/>
+                                    <text x="68" y="40" text-anchor="middle" fill="white" font-size="11" font-weight="bold">123</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h3>Word Counter</h3>
+                            <p>Count words, characters, sentences, and paragraphs in real-time for your writing projects with detailed statistics.</p>
+                            <a href="#" class="card-link">Use Tool →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories" id="categories">
+            <div class="container">
+                <h2 class="section-title">All Tool Categories</h2>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Finance -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="18" cy="52" r="10" fill="rgba(255, 215, 0, 0.8)" stroke="#FFA500" stroke-width="2"/>
+                                <circle cx="35" cy="45" r="10" fill="rgba(255, 215, 0, 0.8)" stroke="#FFA500" stroke-width="2"/>
+                                <circle cx="52" cy="38" r="10" fill="rgba(255, 215, 0, 0.8)" stroke="#FFA500" stroke-width="2"/>
+                                <path d="M5 18 L65 18 Q65 12 58 12 L12 12 Q5 12 5 18 L5 52" stroke="rgba(255, 215, 0, 1)" stroke-width="3" fill="none"/>
+                                <text x="18" y="57" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">₹</text>
+                                <text x="35" y="50" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">₹</text>
+                                <text x="52" y="43" text-anchor="middle" fill="#333" font-size="9" font-weight="bold">₹</text>
+                            </svg>
+                        </div>
+                        <h3>Finance</h3>
+                    </div>
+
+                    <!-- Health -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35 18 C42 24, 48 30, 42 42 C35 48, 28 42, 22 35 C16 30, 22 24, 35 18 Z" fill="rgba(255, 99, 132, 0.8)" stroke="#ff4757" stroke-width="2"/>
+                                <path d="M18 35 Q30 28 42 35 Q54 42 66 35" stroke="#ff4757" stroke-width="3" fill="none"/>
+                                <circle cx="30" cy="32" r="2.5" fill="#ff4757"/>
+                                <circle cx="42" cy="32" r="2.5" fill="#ff4757"/>
+                            </svg>
+                        </div>
+                        <h3>Health</h3>
+                    </div>
+
+                    <!-- Text Tools -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="12" y="22" width="46" height="30" rx="4" fill="rgba(124, 58, 237, 0.2)" stroke="#7C3AED" stroke-width="2"/>
+                                <text x="24" y="40" fill="#7C3AED" font-size="18" font-weight="bold">Aa</text>
+                                <rect x="40" y="32" width="12" height="4" fill="rgba(124, 58, 237, 0.6)"/>
+                                <rect x="40" y="38" width="10" height="4" fill="rgba(124, 58, 237, 0.6)"/>
+                                <rect x="40" y="44" width="14" height="4" fill="rgba(124, 58, 237, 0.6)"/>
+                            </svg>
+                        </div>
+                        <h3>Text Tools</h3>
+                    </div>
+
+                    <!-- Converters -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="35" cy="35" r="25" fill="none" stroke="rgba(6, 182, 212, 0.8)" stroke-width="3"/>
+                                <path d="M35 10 Q48 24 35 35 Q22 48 35 60" stroke="#06B6D4" stroke-width="3" fill="none"/>
+                                <path d="M60 35 Q48 48 35 35 Q22 22 10 35" stroke="#06B6D4" stroke-width="3" fill="none"/>
+                                <polygon points="32,57 38,57 35,63" fill="#06B6D4"/>
+                                <polygon points="32,13 38,13 35,7" fill="#06B6D4"/>
+                            </svg>
+                        </div>
+                        <h3>Converters</h3>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35 12 L42 24 L54 24 L45 34 L48 46 L35 39 L22 46 L25 34 L16 24 L28 24 Z" fill="rgba(245, 158, 11, 0.8)" stroke="#F59E0B" stroke-width="2"/>
+                                <rect x="29" y="48" width="12" height="18" fill="rgba(245, 158, 11, 0.6)" stroke="#F59E0B" stroke-width="2"/>
+                                <ellipse cx="35" cy="68" rx="10" ry="3" fill="rgba(245, 158, 11, 0.4)"/>
+                            </svg>
+                        </div>
+                        <h3>Education</h3>
+                    </div>
+
+                    <!-- Utilities -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="18" y="30" width="30" height="4" rx="2" fill="rgba(156, 163, 175, 0.8)" stroke="#9CA3AF" stroke-width="1"/>
+                                <circle cx="18" cy="32" r="8" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+                                <circle cx="48" cy="32" r="8" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+                                <path d="M48 18 L60 30 L48 42 M42 24 L54 24 M42 36 L50 36" stroke="#9CA3AF" stroke-width="2" fill="none"/>
+                                <circle cx="30" cy="54" r="10" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+                                <path d="M25 48 L35 58 M35 48 L25 58" stroke="#9CA3AF" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Utilities</h3>
+                    </div>
+
+                    <!-- Design -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="14" fill="rgba(239, 68, 68, 0.8)" stroke="#EF4444" stroke-width="2"/>
+                                <circle cx="46" cy="30" r="12" fill="rgba(34, 197, 94, 0.8)" stroke="#22C55E" stroke-width="2"/>
+                                <circle cx="35" cy="52" r="10" fill="rgba(59, 130, 246, 0.8)" stroke="#3B82F6" stroke-width="2"/>
+                                <rect x="12" y="42" width="18" height="4" rx="2" fill="rgba(245, 158, 11, 0.8)"/>
+                                <circle cx="52" cy="52" r="8" fill="rgba(168, 85, 247, 0.8)" stroke="#A855F7" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Design</h3>
+                    </div>
+
+                    <!-- Business -->
+                    <div class="category-box">
+                        <div class="category-icon-container">
+                            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="18" y="24" width="34" height="30" rx="4" fill="rgba(107, 114, 128, 0.2)" stroke="#6B7280" stroke-width="2"/>
+                                <rect x="21" y="18" width="28" height="4" rx="2" fill="#6B7280"/>
+                                <rect x="24" y="36" width="22" height="10" fill="rgba(34, 197, 94, 0.2)" stroke="#22C55E" stroke-width="1"/>
+                                <path d="M30 38 L35 44 L40 38" stroke="#22C55E" stroke-width="2" fill="none"/>
+                                <line x1="26" y1="42" x2="44" y2="42" stroke="#22C55E" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <h3>Business</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Are all calculators completely free to use?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes, absolutely! All calculators and tools on Calculent are completely free to use with no hidden costs, premium features, or subscription requirements. We believe in making powerful calculation tools accessible to everyone.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you store my calculation data?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                No, we do not store any of your calculation data. All calculations are performed locally in your browser, ensuring complete privacy. Your data never leaves your device, and we have no record of what you calculate.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How accurate are the calculations?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Our calculators use industry-standard formulas and algorithms to ensure maximum accuracy. All tools are thoroughly tested and validated against established mathematical and financial standards. However, for critical financial decisions, we recommend consulting with professionals.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I use these tools on mobile devices?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes! All our calculators are fully responsive and optimized for mobile devices, tablets, and desktops. The interface automatically adapts to your screen size for the best user experience across all devices.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do I need to create an account to use the tools?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                No account required! You can access and use all calculators immediately without any registration, login, or personal information. Simply visit the tool you need and start calculating right away.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Are new calculators added regularly?</h3>
+                            <svg class="faq-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes, we continuously expand our collection based on user feedback and demand. New calculators and tools are added monthly, covering various categories from finance and health to productivity and education. Follow us for updates on new additions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance Section -->
+        <section class="compliance" id="compliance">
+            <div class="container">
+                <h2 class="section-title">Compliance & Standards</h2>
+                <div class="compliance-grid">
+                    <div class="compliance-card security">
+                        <div class="compliance-icon">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M25 8 L30 18 Q35 23 30 28 L25 38 L20 28 Q15 23 20 18 Z" fill="rgba(16, 185, 129, 0.2)" stroke="#10B981" stroke-width="2"/>
+                                <circle cx="25" cy="23" r="6" fill="rgba(16, 185, 129, 0.8)" stroke="#059669" stroke-width="2"/>
+                                <path d="M22 20 L24 22 L28 18" stroke="white" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3>Data Security</h3>
+                        <p>All calculations are performed locally in your browser with no server-side data storage. Your information never leaves your device, ensuring complete privacy and security.</p>
+                        <div class="compliance-badge">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                            </svg>
+                            Client-Side Processing
+                        </div>
+                    </div>
+
+                    <div class="compliance-card privacy">
+                        <div class="compliance-icon">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="15" y="10" width="20" height="30" rx="3" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" stroke-width="2"/>
+                                <rect x="18" y="15" width="14" height="8" rx="1" fill="rgba(59, 130, 246, 0.6)"/>
+                                <rect x="18" y="25" width="14" height="2" fill="rgba(59, 130, 246, 0.4)"/>
+                                <rect x="18" y="28" width="10" height="2" fill="rgba(59, 130, 246, 0.4)"/>
+                                <rect x="18" y="31" width="12" height="2" fill="rgba(59, 130, 246, 0.4)"/>
+                                <circle cx="25" cy="36" r="1.5" fill="#3B82F6"/>
+                            </svg>
+                        </div>
+                        <h3>Privacy Compliance</h3>
+                        <p>We follow GDPR, CCPA, and international privacy standards. No cookies for tracking, no personal data collection, and transparent privacy practices.</p>
+                        <div class="compliance-badge">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                            </svg>
+                            GDPR Compliant
+                        </div>
+                    </div>
+
+                    <div class="compliance-card accessibility">
+                        <div class="compliance-icon">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="25" cy="15" r="5" fill="rgba(245, 158, 11, 0.8)" stroke="#F59E0B" stroke-width="2"/>
+                                <path d="M15 25 Q20 22 25 25 Q30 28 35 25" stroke="#F59E0B" stroke-width="2" fill="none"/>
+                                <path d="M20 30 L25 40 L30 30" stroke="#F59E0B" stroke-width="2" fill="none"/>
+                                <path d="M15 35 L20 30 M35 35 L30 30" stroke="#F59E0B" stroke-width="2" fill="none"/>
+                                <circle cx="20" cy="45" r="3" fill="rgba(245, 158, 11, 0.8)"/>
+                                <circle cx="30" cy="45" r="3" fill="rgba(245, 158, 11, 0.8)"/>
+                            </svg>
+                        </div>
+                        <h3>Accessibility Standards</h3>
+                        <p>Built following WCAG 2.1 AA guidelines to ensure our tools are accessible to users with disabilities, including screen reader compatibility and keyboard navigation.</p>
+                        <div class="compliance-badge">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                            </svg>
+                            WCAG 2.1 AA
+                        </div>
+                    </div>
+
+                    <div class="compliance-card reliability">
+                        <div class="compliance-icon">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="25" cy="25" r="18" fill="none" stroke="#EF4444" stroke-width="3"/>
+                                <path d="M15 25 L22 18 L28 24 L35 17" stroke="#EF4444" stroke-width="3" fill="none"/>
+                                <path d="M25 10 L27 15 L32 15 L28 18 L30 23 L25 20 L20 23 L22 18 L18 15 L23 15 Z" fill="#EF4444"/>
+                            </svg>
+                        </div>
+                        <h3>Reliability & Accuracy</h3>
+                        <p>Our calculations use verified algorithms and formulas. Regular testing ensures 99.9% accuracy across all tools, with transparent methodology and source documentation.</p>
+                        <div class="compliance-badge">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                            </svg>
+                            99.9% Accurate
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Why Choose Calculent?</h2>
+                        <p>Calculent is your all-in-one destination for professional calculators and tools that make complex tasks simple. We believe powerful tools should be accessible to everyone, anywhere, anytime.</p>
+                        <p>Our mission is to provide accurate, fast, and user-friendly calculators that save you time and help you make informed decisions in your personal and professional life.</p>
+                        <p>Whether you're managing finances, tracking health metrics, converting units, or analyzing data, Calculent has the perfect tool for you with guaranteed accuracy and privacy.</p>
+
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <div class="feature-icon-container">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="12" y="18" width="30" height="18" rx="4" fill="rgba(34, 197, 94, 0.2)" stroke="#22C55E" stroke-width="2"/>
+                                        <path d="M18 24 L24 30 L36 18" stroke="#22C55E" stroke-width="3" fill="none"/>
+                                        <text x="30" y="48" text-anchor="middle" fill="#22C55E" font-size="14" font-weight="bold">₹0</text>
+                                    </svg>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>100% Free Forever</h4>
+                                    <p>All tools are completely free with no hidden costs, premium features, or subscription requirements. Quality tools for everyone.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon-container">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M30 10 L36 22 Q42 28 36 34 L30 46 L24 34 Q18 28 24 22 Z" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" stroke-width="2"/>
+                                        <circle cx="30" cy="28" r="8" fill="rgba(59, 130, 246, 0.8)" stroke="#1D4ED8" stroke-width="2"/>
+                                        <path d="M26 25 L29 28 L34 22" stroke="white" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Privacy First Always</h4>
+                                    <p>Your data never leaves your browser - complete privacy guaranteed with client-side processing and zero data collection.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon-container">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="30" cy="30" r="22" fill="none" stroke="#F59E0B" stroke-width="3"/>
+                                        <path d="M18 30 L26 22 L34 28 L42 20" stroke="#F59E0B" stroke-width="3" fill="none"/>
+                                        <path d="M30 12 L32 18 L38 18 L34 22 L36 28 L30 24 L24 28 L26 22 L20 18 L26 18 Z" fill="#F59E0B"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Lightning Fast Performance</h4>
+                                    <p>Instant calculations with optimized algorithms, zero loading time, and responsive design for seamless user experience.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon-container">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="18" y="12" width="24" height="36" rx="4" fill="rgba(168, 85, 247, 0.2)" stroke="#A855F7" stroke-width="2"/>
+                                        <rect x="21" y="18" width="18" height="10" rx="2" fill="rgba(168, 85, 247, 0.6)"/>
+                                        <rect x="21" y="30" width="18" height="3" fill="rgba(168, 85, 247, 0.4)"/>
+                                        <rect x="21" y="34" width="12" height="3" fill="rgba(168, 85, 247, 0.4)"/>
+                                        <rect x="21" y="38" width="15" height="3" fill="rgba(168, 85, 247, 0.4)"/>
+                                        <circle cx="30" cy="43" r="2" fill="#A855F7"/>
+                                    </svg>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Mobile Optimized</h4>
+                                    <p>Perfectly responsive design that works seamlessly on any device - smartphone, tablet, or desktop computer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-visual">
+                        <div class="emoji">🚀</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Simplify Your Work?</h2>
+                    <p>Join thousands of users who trust Calculent for their daily calculations and make your life easier today</p>
+                    <a href="#tools" class="btn btn-secondary">Explore All Tools</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#">All Calculators</a></li>
+                        <li><a href="#">Finance Tools</a></li>
+                        <li><a href="#">Health Tools</a></li>
+                        <li><a href="#">Converters</a></li>
+                        <li><a href="#">Text Tools</a></li>
+                        <li><a href="#">Business Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Feature Requests</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Compliance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon">📧</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">💼</a>
+                <a href="#" class="social-icon">🐙</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Calculent. Built by Vajid Khan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tool names for search
+        const tools = [
+            'Mortgage Calculator',
+            'BMI Calculator', 
+            'Password Generator',
+            'Temperature Converter',
+            'Tip Calculator',
+            'Word Counter',
+            'Currency Converter',
+            'Age Calculator',
+            'Percentage Calculator',
+            'Date Calculator',
+            'Loan Calculator',
+            'Investment Calculator',
+            'Calorie Calculator',
+            'Unit Converter',
+            'Tax Calculator'
+        ];
+
+        // Loading overlay
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Search functionality with autocomplete
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `/tools.html?search=${encodeURIComponent(query)}`;
+            }
+        });
+
+        // Add search suggestions
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            // Future implementation: show dropdown with matching tools
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for advanced fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    // Add staggered animation for multiple elements
+                    if (entry.target.parentElement.classList.contains('cards-grid') || 
+                        entry.target.parentElement.classList.contains('categories-grid')) {
+                        const siblings = Array.from(entry.target.parentElement.children);
+                        const index = siblings.indexOf(entry.target);
+                        entry.target.style.transitionDelay = `${index * 0.1}s`;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.card, .category-box, .compliance-card, .feature-item').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Enhanced floating animation for mobile - KEEP ICONS VISIBLE
+        const floatingIcons = document.querySelectorAll('.floating-icon');
+        if (floatingIcons.length > 0) {
+            floatingIcons.forEach((icon, index) => {
+                try {
+                    // Enhanced random variations
+                    const randomDelay = Math.random() * 3;
+                    const randomDuration = 6 + Math.random() * 4;
+                    
+                    icon.style.animationDelay = `${randomDelay}s`;
+                    icon.style.animationDuration = `${randomDuration}s`;
+                    
+                    // Advanced mouse/touch interaction
+                    const handleInteractionStart = () => {
+                        if (window.innerWidth > 968) {
+                            icon.style.transform = 'scale(1.15) translateY(-8px) rotateX(15deg)';
+                        } else {
+                            icon.style.transform = 'scale(1.1) translateY(-5px)';
+                        }
+                        icon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                        icon.style.filter = 'drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4))';
+                    };
+                    
+                    const handleInteractionEnd = () => {
+                        icon.style.transform = window.innerWidth > 968 ? 
+                            'scale(1) translateY(0px) rotateX(0deg)' : 
+                            'scale(0.7) translateY(0px)';
+                        icon.style.filter = 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))';
+                    };
+                    
+                    // Mouse events
+                    icon.addEventListener('mouseenter', handleInteractionStart);
+                    icon.addEventListener('mouseleave', handleInteractionEnd);
+                    
+                    // Touch events for mobile
+                    icon.addEventListener('touchstart', handleInteractionStart);
+                    icon.addEventListener('touchend', handleInteractionEnd);
+                    
+                } catch (error) {
+                    console.log('Animation setup skipped for icon', index);
+                }
+            });
+
+            // Enhanced parallax effect with smoother animation
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        try {
+                            const scrolled = window.pageYOffset;
+                            const rate = scrolled * -0.1;
+                            
+                            floatingIcons.forEach((icon, index) => {
+                                const speed = 0.05 + (index * 0.02);
+                                const yPos = rate * speed;
+                                
+                                // Maintain mobile scaling during parallax
+                                if (window.innerWidth <= 968) {
+                                    icon.style.transform = `translateY(${yPos}px) scale(0.7)`;
+                                } else if (window.innerWidth <= 640) {
+                                    icon.style.transform = `translateY(${yPos}px) scale(0.5)`;
+                                } else if (window.innerWidth <= 480) {
+                                    icon.style.transform = `translateY(${yPos}px) scale(0.4)`;
+                                } else {
+                                    icon.style.transform = `translateY(${yPos}px)`;
+                                }
+                            });
+                        } catch (error) {
+                            // Silently handle scroll errors
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        }
+
+        // Header background change on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const header = document.querySelector('header');
+            
+            if (scrollTop > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+            }
+
+            // Hide/show header on scroll (disabled on mobile)
+            if (window.innerWidth > 968) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Enhanced card hover effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.03)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize animations with proper timing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Staggered card animations
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('fade-in');
+                    }, index * 150);
+                });
+            }, 800);
+
+            // Staggered category animations
+            setTimeout(() => {
+                const categories = document.querySelectorAll('.category-box');
+                categories.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.classList.add('fade-in');
+                    }, index * 120);
+                });
+            }, 1200);
+
+            // Feature items animation
+            setTimeout(() => {
+                const features = document.querySelectorAll('.feature-item');
+                features.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }, index * 200);
+                });
+            }, 1500);
+
+            // Ensure mobile icons are properly scaled on load
+            if (window.innerWidth <= 968) {
+                floatingIcons.forEach(icon => {
+                    if (window.innerWidth <= 480) {
+                        icon.style.transform = 'scale(0.4)';
+                    } else if (window.innerWidth <= 640) {
+                        icon.style.transform = 'scale(0.5)';
+                    } else {
+                        icon.style.transform = 'scale(0.7)';
+                    }
+                });
+            }
+        });
+
+        // Handle window resize for responsive floating icons
+        window.addEventListener('resize', debounce(function() {
+            floatingIcons.forEach(icon => {
+                if (window.innerWidth <= 480) {
+                    icon.style.transform = 'scale(0.4)';
+                } else if (window.innerWidth <= 640) {
+                    icon.style.transform = 'scale(0.5)';
+                } else if (window.innerWidth <= 968) {
+                    icon.style.transform = 'scale(0.7)';
+                } else {
+                    icon.style.transform = 'scale(1)';
+                }
+            });
+        }, 250));
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Add smooth reveal animations for compliance cards
+        const complianceCards = document.querySelectorAll('.compliance-card');
+        const complianceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        complianceCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            complianceObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
