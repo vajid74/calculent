@@ -11,10 +11,4 @@ Refresh the ready-to-upload folders after making changes by running:
 ./scripts/package.sh
 ```
 
-Need ZIP archives for distribution? Generate them on-demand (they are ignored by default) with:
-
-```bash
-CREATE_ZIP=1 ./scripts/package.sh
-```
-
-The script copies from `wp-content/themes/calculent-child` and `wp-content/plugins/calculent-logic` so all distributable assets stay in sync with the codebase.
+ZIP archives for distribution are built automatically; rerun the script any time you need fresh `.zip` files for uploading into WordPress. The script copies from `wp-content/themes/calculent-child` and `wp-content/plugins/calculent-logic` so all distributable assets stay in sync with the codebase.
