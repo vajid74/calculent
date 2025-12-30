@@ -1,0 +1,15 @@
+{
+  "name": "calculent-astra-child",
+  "version": "1.0.0",
+  "description": "A child theme for Astra WordPress theme, customized for Calculent",
+  "main": "functions.php",
+  "author": "Vajid74",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "wordpress",
+    "theme",
+    "child-theme",
+    "astra",
+    "calculent"
+  ]
+}
