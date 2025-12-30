@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
 THEME_DIR="$ROOT_DIR/wp-content/themes/calculent-child"
 PLUGIN_DIR="$ROOT_DIR/wp-content/plugins/calculent-logic"
-CREATE_ZIP="${CREATE_ZIP:-0}"
+CREATE_ZIP="${CREATE_ZIP:-1}"
 
 function ensure_exists() {
   local path="$1"
@@ -38,17 +38,16 @@ function sync_directory() {
 
 ensure_exists "$THEME_DIR" "theme"
 ensure_exists "$PLUGIN_DIR" "plugin"
+if [[ ! -f "$THEME_DIR/style.css" ]]; then
+  echo "Expected theme stylesheet at $THEME_DIR/style.css (WordPress will reject the upload without it)" >&2
+  exit 1
+fi
 
 mkdir -p "$DIST_DIR"
-if [[ "$CREATE_ZIP" == "1" ]]; then
-  echo "Creating ZIP archives (CREATE_ZIP=$CREATE_ZIP)" >&2
-  rm -f "$DIST_DIR"/calculent-child.zip "$DIST_DIR"/calculent-logic.zip
-  package_dir "$THEME_DIR" "$DIST_DIR/calculent-child.zip"
-  package_dir "$PLUGIN_DIR" "$DIST_DIR/calculent-logic.zip"
-else
-  echo "Skipping ZIP creation and cleaning any existing archives (CREATE_ZIP=$CREATE_ZIP)" >&2
-  rm -f "$DIST_DIR"/calculent-child.zip "$DIST_DIR"/calculent-logic.zip
-fi
+echo "Creating ZIP archives (CREATE_ZIP=$CREATE_ZIP)" >&2
+rm -f "$DIST_DIR"/calculent-child.zip "$DIST_DIR"/calculent-logic.zip
+package_dir "$THEME_DIR" "$DIST_DIR/calculent-child.zip"
+package_dir "$PLUGIN_DIR" "$DIST_DIR/calculent-logic.zip"
 
 sync_directory "$THEME_DIR" "$DIST_DIR/calculent-child"
 sync_directory "$PLUGIN_DIR" "$DIST_DIR/calculent-logic"
