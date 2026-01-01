@@ -1,2 +1,2 @@
-# Generated distribution archives are not tracked
+# Ignore generated zip archives; users can package the dist folders themselves.
 *.zip

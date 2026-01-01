@@ -1,12 +1,8 @@
-# Calculent ready-to-upload packages
+# Calculent distribution folders
 
-The `dist` folder now contains only the files needed by WordPress:
+The `dist` folder includes the ready-to-use theme and plugin directories:
 
-- `calculent-child/` — Astra child theme folder. Compress **this folder itself** to install via Appearance → Themes, or upload the folder over SFTP.
-- `calculent-logic/` — plugin folder. Compress **this folder itself** to install via Plugins → Add New, or upload the folder over SFTP.
+- `calculent-child/` — Astra child theme for upload via SFTP or manual packaging.
+- `calculent-logic/` — plugin folder for upload via SFTP or manual packaging.
 
-Zip archives are gitignored; if you need fresh zips, run:
-
-```bash
-./scripts/package.sh
-```
+If you need a zip archive, run `./scripts/package.sh` locally to generate one from these folders.
